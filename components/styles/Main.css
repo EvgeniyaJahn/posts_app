@@ -1,0 +1,23 @@
+* {
+  margin: 0 auto;
+  background: rgb(242, 240, 241);
+  box-sizing: border-box;
+}
+.App {
+  text-align: center;
+  width: 800px;
+}
+.post {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  border: 2px solid teal;
+}
+.post__content {
+  align-items: center;
+}
+.btn {
+  background: rgb(236, 26, 201);
+  margin: 15px;
+}
