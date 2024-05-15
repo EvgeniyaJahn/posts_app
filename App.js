@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Counter from "./components/Counter";
 import Main from "./components/styles/Main.css";
 import ClassCounter from "./components/ClassCounter";
@@ -23,38 +23,57 @@ function App() {
     { id: 2, title: "Python", body: "Description" },
     { id: 3, title: "Python", body: "Description" },
   ]);
+  const [title, setTitle] = useState("");
+  // const bodyInputRef = useRef();
+  const [body, setBody] = useState("");
 
-  // let likes = 0;
-  // function increment() {
-  //   likes += 1;
-  //   console.log(likes);
-  //   //Pri etoj funkcie ne renderet rezultat ego vidno v konsole potomu chto nado ego sochranat v state
-  // }
-
+  //
   //Functions
-  //Perepisyvaju obychnuju logiku na render logiku
-  // let likes = 0;
-  // function increment() {
-  //   likes += 1;
-  //   console.log(likes);
-  //   //Pri etoj funkcie ne renderet rezultat ego vidno v konsole potomu chto nado ego sochranat v state
-  // }
-  // function increment() {
-  //   setLikes(likes + 1);
-  // }
-
-  // function decrement() {
-  //   setLikes(likes - 1);
-  // }
+  const addNewPost = (event) => {
+    event.preventDefault();
+    const newPost = {
+      id: Date.now(),
+      title,
+      body,
+    };
+    setPosts([...posts, newPost]);
+    console.log(newPost + " TITLE BODY");
+    //   event.preventDefault();
+    //   alert(title + "TITLE");
+    //   console.log(title + "LOG TITLE");
+    //   console.log(
+    //     bodyInputRef.current.value,
+    //     "CURRENT VALUE TOTZHE DOM ELEMENT no s sobstvennoj komponentoj ne rabotaet G..."
+    //   );
+  };
   //
   return (
     <div className="App">
       <Counter />
       <ClassCounter />
       <form>
-        <MyInput type="text" placeholder="Nazvanie"></MyInput>
-        <MyInput type="text" placeholder="Opisanie"></MyInput>
-        <MyButton disabled={true}>Sozdat post</MyButton>
+        {/* Upravlajemij komponent */}
+        <MyInput
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+          type="text"
+          placeholder="Nazvanie"
+        ></MyInput>
+        {/* Neupravlajemij komponenty */}
+        {/* <input type="text" placeholder="Opisanie" ref={bodyInputRef} ></input> */}
+        {/* <MyInput
+          ref={bodyInputRef}
+          type="text"
+          placeholder="Opisanie"
+        ></MyInput> */}
+        {/* Upravlajemij komponent */}
+        <MyInput
+          value={body}
+          onChange={(event) => setBody(event.target.value)}
+          type="text"
+          placeholder="Opisanie"
+        ></MyInput>
+        <MyButton onClick={addNewPost}>Sozdat post</MyButton>
       </form>
       <PostList posts={posts} title="Posty pro js" />
       <PostList posts={posts1} title="Posty pro python" />

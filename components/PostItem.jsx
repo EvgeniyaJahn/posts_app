@@ -1,8 +1,6 @@
 import React from "react";
-import MyButton from "./UI/button/MyButton";
 
 const PostItem = (props) => {
-  console.log(props, "PROPSY");
   //State
   //
   //Functions
