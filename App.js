@@ -5,6 +5,8 @@ import Main from "./components/styles/Main.css";
 import ClassCounter from "./components/ClassCounter";
 import PostItem from "./components/PostItem";
 import PostList from "./components/PostList";
+import MyButton from "./components/UI/button/MyButton";
+import MyInput from "./components/UI/input/MyInput";
 
 function App() {
   //State
@@ -18,6 +20,8 @@ function App() {
   ]);
   const [posts1, setPosts1] = useState([
     { id: 1, title: "Python", body: "Description" },
+    { id: 2, title: "Python", body: "Description" },
+    { id: 3, title: "Python", body: "Description" },
   ]);
 
   // let likes = 0;
@@ -48,9 +52,9 @@ function App() {
       <Counter />
       <ClassCounter />
       <form>
-        <input type="text" placeholder="Nazvanie"></input>
-        <input type="text" placeholder="Opisanie"></input>
-        <button className="btn">Sozdat post</button>
+        <MyInput type="text" placeholder="Nazvanie"></MyInput>
+        <MyInput type="text" placeholder="Opisanie"></MyInput>
+        <MyButton disabled={true}>Sozdat post</MyButton>
       </form>
       <PostList posts={posts} title="Posty pro js" />
       <PostList posts={posts1} title="Posty pro python" />
