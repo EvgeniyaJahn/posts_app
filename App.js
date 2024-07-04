@@ -3,94 +3,60 @@ import React, { useRef, useState } from "react";
 import Counter from "./components/Counter";
 import Main from "./components/styles/Main.css";
 import ClassCounter from "./components/ClassCounter";
-import PostItem from "./components/PostItem";
 import PostList from "./components/PostList";
-import MyButton from "./components/UI/button/MyButton";
+import PostForm from "./components/PostForm";
+import MySelect from "./components/UI/select/Myselect";
 import MyInput from "./components/UI/input/MyInput";
 
 function App() {
   //State
-  // const state = useState("first function");
-  // console.log(state);
-  // const [likes, setLikes] = useState(10);
   const [posts, setPosts] = useState([
     { id: 1, title: "JavaScript", body: "Description" },
     { id: 2, title: "JavaScript", body: "Description" },
     { id: 3, title: "JavaScript", body: "Description" },
   ]);
-  const [posts1, setPosts1] = useState([
-    { id: 1, title: "Python", body: "Description" },
-    { id: 2, title: "Python", body: "Description" },
-    { id: 3, title: "Python", body: "Description" },
-  ]);
-  const [title, setTitle] = useState("");
+
+  const [post, setPost] = useState({
+    title: "",
+    body: "",
+  });
+
+  const [title, setTitle] = useState(" ");
   // const bodyInputRef = useRef();
   const [body, setBody] = useState("");
-
   //
   //Functions
-  const addNewPost = (event) => {
-    event.preventDefault();
-    const newPost = {
-      id: Date.now(),
-      title,
-      body,
-    };
+  const createPost = (newPost) => {
     setPosts([...posts, newPost]);
-    console.log(newPost + " TITLE BODY");
-    //   event.preventDefault();
-    //   alert(title + "TITLE");
-    //   console.log(title + "LOG TITLE");
-    //   console.log(
-    //     bodyInputRef.current.value,
-    //     "CURRENT VALUE TOTZHE DOM ELEMENT no s sobstvennoj komponentoj ne rabotaet G..."
-    //   );
+  };
+
+  //Getting posts from child's component
+  const removePost = (post) => {
+    setPosts(posts.filter((p) => p.id !== post.id));
   };
   //
   return (
     <div className="App">
       <Counter />
       <ClassCounter />
-      <form>
-        {/* Upravlajemij komponent */}
-        <MyInput
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
-          type="text"
-          placeholder="Nazvanie"
-        ></MyInput>
-        {/* Neupravlajemij komponenty */}
-        {/* <input type="text" placeholder="Opisanie" ref={bodyInputRef} ></input> */}
-        {/* <MyInput
-          ref={bodyInputRef}
-          type="text"
-          placeholder="Opisanie"
-        ></MyInput> */}
-        {/* Upravlajemij komponent */}
-        <MyInput
-          value={body}
-          onChange={(event) => setBody(event.target.value)}
-          type="text"
-          placeholder="Opisanie"
-        ></MyInput>
-        <MyButton onClick={addNewPost}>Sozdat post</MyButton>
-      </form>
-      <PostList posts={posts} title="Posty pro js" />
-      <PostList posts={posts1} title="Posty pro python" />
-      {/* <PostItem post={{ id: 1, title: "JavaScrippt", body: "Description" }} /> */}
+      <PostForm create={createPost}></PostForm>
+      <PostList remove={removePost} posts={posts} title="Posty pro js" />
+      <hr style={{ margin: "15px 0" }}></hr>
+      {/* <div>
+         <MySelect>
+          defaultValue = 'Сортировка' options=
+          {[
+            { value: "title", name: "по названию" },
+            { value: "body", name: "по описанию" },
+          ]}
+        </MySelect> 
+      </div>
+      {posts.length !== 0 ? (
+        <PostList remove={removePost} posts={posts} title="Posty pro js" />
+      ) : (
+        <h1 style={{ textAlign: "center" }}>Посты не были найдены </h1>
+      )} */}
     </div>
-    // <div>
-    //   <h1>{likes}</h1>
-    //   <h1>{value}</h1>
-    //   <input
-    //     type="text"
-    //     value={value}
-    //     onChange={(event) => setValue(event.target.value)}
-    //   />
-    //   <button onClick={increment}>Increment</button>
-    //   <button onClick={decrement}>Decrement</button>
-    //   {/*<button onClick={() => (likes -= 1)}>Decrement</button> */}
-    // </div>
   );
 }
 
